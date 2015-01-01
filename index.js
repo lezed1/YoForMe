@@ -20,19 +20,19 @@ var api_token = process.env.API_TOKEN;
 var yo_url = 'https://api.justyo.co/yo/';
 var username = process.env.USERNAME;
 
-new CronJob('* * * * * *', function(){
-    request.post(yo_url, {form: {
-      api_token: api_token,
-      username: username
-    }}, function(err,httpResponse,body){
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log('Sent Yo to ' + username);
-      console.log(httpResponse.statusCode);
-    });
-    
-    // Keep the Heroku Dyno alive
-    request('http://yopeople.herokuapp.com')
+new CronJob('0 */25 * * * *', function(){
+  request.post(yo_url, {form: {
+    api_token: api_token,
+    username: username
+  }}, function(err,httpResponse,body){
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Sent Yo to ' + username);
+    console.log(httpResponse.statusCode);
+  });
+  
+  // Keep the Heroku Dyno alive
+  request('http://yopeople.herokuapp.com')
 }, null, true);
