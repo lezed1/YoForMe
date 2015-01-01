@@ -20,7 +20,7 @@ var api_token = process.env.API_TOKEN;
 var yo_url = 'https://api.justyo.co/yo/';
 var username = process.env.USERNAME;
 
-new CronJob('0 */25 * * * *', function(){
+new CronJob('0 */15 * * * *', function(){
   request.post(yo_url, {form: {
     api_token: api_token,
     username: username
